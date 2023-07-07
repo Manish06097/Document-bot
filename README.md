@@ -11,6 +11,8 @@ git clone https://github.com/Manish06097/Document-bot/
 pip install -r requirements.txt
 ```
 
+4. then generate openapi key and add to the uttil.py in backend folder 
+
 
 ## Frontend
 
