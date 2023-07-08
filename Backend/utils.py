@@ -1,9 +1,13 @@
 import PyPDF2
+import os
 from langchain.text_splitter import CharacterTextSplitter
 from langchain import OpenAI
 from langchain.chains import RetrievalQA 
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
+from dotenv import load_dotenv
+load_dotenv()
+apikey = os.getenv('APIKEY')
 
 
 
@@ -23,13 +27,13 @@ def textspliter(text,chunksize,chunkoverlap,separator):
 
 
 def process_message(user_message: str,name) -> str:
-    qa = RetrievalQA.from_chain_type(llm=OpenAI(model='text-davinci-003',openai_api_key=""), chain_type='stuff', retriever=name.as_retriever())
+    qa = RetrievalQA.from_chain_type(llm=OpenAI(model='text-davinci-003',openai_api_key=apikey), chain_type='stuff', retriever=name.as_retriever())
     ans = qa.run("if the user question not in the provided content or que is incomplete than ask user to give more information or ask relevent que to the document and  make the output more representable like in bullet points and also output should be precise and relevent and short -: "+user_message)
     
     return f"{ans}"
 
 def accuracy_message(user_message: str,name) -> str:
-    qa = RetrievalQA.from_chain_type(llm=OpenAI(model='text-davinci-003',openai_api_key="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"), chain_type='stuff', retriever=name.as_retriever())
+    qa = RetrievalQA.from_chain_type(llm=OpenAI(model='text-davinci-003',openai_api_key=apikey), chain_type='stuff', retriever=name.as_retriever())
     ans = qa.run("output should be precise and relevent and short -: "+user_message)
     
     return f"{ans}"
