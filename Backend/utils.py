@@ -33,7 +33,7 @@ def process_message(user_message: str,name) -> str:
     return f"{ans}"
 
 def accuracy_message(user_message: str,name) -> str:
-    qa = RetrievalQA.from_chain_type(llm=OpenAI(model='text-davinci-003',openai_api_key="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"), chain_type='stuff', retriever=name.as_retriever())
+    qa = RetrievalQA.from_chain_type(llm=OpenAI(model='text-davinci-003',openai_api_key=apikey), chain_type='stuff', retriever=name.as_retriever())
     ans = qa.run("output should be precise and relevent and short -: "+user_message)
     
     return f"{ans}"
