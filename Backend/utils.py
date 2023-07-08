@@ -28,7 +28,7 @@ def textspliter(text,chunksize,chunkoverlap,separator):
 
 def process_message(user_message: str,name) -> str:
     qa = RetrievalQA.from_chain_type(llm=OpenAI(model='text-davinci-003',openai_api_key=apikey), chain_type='stuff', retriever=name.as_retriever())
-    ans = qa.run("if the user question not in the provided content or que is incomplete than ask user to give more information or ask relevent que to the document and  make the output more representable like in bullet points and also output should be precise and relevent and short -: "+user_message)
+    ans = qa.run('user que should be relvent to the document content if not ask the user to ask relvent que or give more information and also output should be precise and relevent and short -: '+user_message)
     
     return f"{ans}"
 
